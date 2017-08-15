@@ -30,8 +30,8 @@ export default class App extends Component {
   }
 
   handleGenerateClick() {
-    let generatedPairs = this.props.state.renderApp.pairs;
-    let generatedHistory = this.props.state.renderApp.history;
+    let generatedPairs = this.props.pairs;
+    let generatedHistory = this.props.history;
     let randomPosition = Math.floor(Math.random() * generatedPairs.length);
     let randomPair = generatedPairs[randomPosition].charAt(0).toUpperCase() + generatedPairs[randomPosition].slice(1);
 
@@ -50,15 +50,15 @@ export default class App extends Component {
   }
 
   autoGrow() {
-    let textHeight = this.props.state.renderApp.height + 1;
+    let textHeight = this.props.textAreaHeight + 1;
 
     this.props.setTextAreaHeight(textHeight);
   }
 
   render() {
-    const history = this.props.state.renderApp.history;
-    const canGenerate = this.props.state.renderApp.canGenerate;
-    const textAreaHeight = this.props.state.renderApp.height;
+    const history = this.props.history;
+    const canGenerate = this.props.canGenerate;
+    const textAreaHeight = this.props.textAreaHeight;
 
     let generatedHistory = (history.length !== 0)
                            ? history.join().replace(/,/g,'\n')
