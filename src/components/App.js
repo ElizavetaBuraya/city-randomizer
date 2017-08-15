@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../styles/App.css';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      canGenerate: true,
-      generatedList: [],
-      history: [],
-      textAreaHeight : 1,
-    };
+export default class App extends Component {
+  constructor(props) {
+    super(props);
     this.generatedListLength = 0;
-    this.loadData = this.loadData.bind(this);
     this.handleGenerateClick = this.handleGenerateClick.bind(this);
   }
 
@@ -32,15 +25,13 @@ class App extends Component {
             });
 
             this.generatedListLength = generatedPairsList.length;
-            this.setState({
-                generatedList: generatedPairsList
-            });
+            this.props.generatePairsList(generatedPairsList);
         });
   }
 
   handleGenerateClick() {
-    let generatedPairs = this.state.generatedList;
-    let generatedHistory = this.state.history;
+    let generatedPairs = this.props.state.renderApp.pairs;
+    let generatedHistory = this.props.state.renderApp.history;
     let randomPosition = Math.floor(Math.random() * generatedPairs.length);
     let randomPair = generatedPairs[randomPosition].charAt(0).toUpperCase() + generatedPairs[randomPosition].slice(1);
 
@@ -48,30 +39,27 @@ class App extends Component {
     generatedHistory.push(randomPair);
     generatedPairs.splice(randomPosition, 1);
 
-    this.setState ({
-      generatedList: generatedPairs,
-      history: generatedHistory
-    });
+    this.props.generatePairsList(generatedPairs);
+    this.props.renderHistory(generatedHistory);
 
     this.autoGrow();
 
-    if (this.state.generatedList.length === 0) {
-      this.setState ({
-        canGenerate: false
-      });
+    if (generatedPairs.length === 0) {
+      this.props.toggleGenerate(false);
     }
   }
 
   autoGrow() {
-    let textHeight = this.state.textAreaHeight + 1;
+    let textHeight = this.props.state.renderApp.height + 1;
 
-    this.setState({
-      textAreaHeight: textHeight
-    });
+    this.props.setTextAreaHeight(textHeight);
   }
 
   render() {
-    const history = this.state.history;
+    const history = this.props.state.renderApp.history;
+    const canGenerate = this.props.state.renderApp.canGenerate;
+    const textAreaHeight = this.props.state.renderApp.height;
+
     let generatedHistory = (history.length !== 0)
                            ? history.join().replace(/,/g,'\n')
                            : null;
@@ -83,7 +71,7 @@ class App extends Component {
         </div>
         <p className="App-content">
           <div className="button-block">
-            <button disabled={!this.state.canGenerate}
+            <button disabled={!canGenerate}
                     onClick={this.handleGenerateClick}>Generate
             </button>
           </div>
@@ -92,12 +80,10 @@ class App extends Component {
                  ref={(input) => {this.textInput = input;}} /><br/>
           <textarea value = {(generatedHistory) ? generatedHistory : ""}
                     cols="38"
-                    rows={this.state.textAreaHeight} /><br />
+                    rows={textAreaHeight} /><br />
           <span>Generated {history.length} out of {this.generatedListLength}</span>
         </p>
       </div>
     );
   }
 }
-
-export default App;
