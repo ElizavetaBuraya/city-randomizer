@@ -69,7 +69,7 @@ export default class App extends Component {
         <div className="App-header">
           <h2>City randomizer</h2>
         </div>
-        <p className="App-content">
+        <div className="App-content">
           <div className="button-block">
             <button disabled={!canGenerate}
                     onClick={this.handleGenerateClick}>Generate
@@ -82,7 +82,7 @@ export default class App extends Component {
                     cols="38"
                     rows={textAreaHeight} /><br />
           <span>Generated {history.length} out of {this.generatedListLength}</span>
-        </p>
+        </div>
       </div>
     );
   }
