@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 
-const pairListObjects = {
- "adjectives": [ "large", "fabulous", "important", "public", "bad" ],
- "cities": [ "Budapest", "Buenos Aires", "Cairo", "Minsk", "Cape Town" ]
-};
-
 class App extends Component {
   constructor() {
     super();
@@ -16,20 +11,31 @@ class App extends Component {
       textAreaHeight : 1,
     };
     this.generatedListLength = 0;
+    this.loadData = this.loadData.bind(this);
     this.handleGenerateClick = this.handleGenerateClick.bind(this);
   }
 
   componentDidMount() {
-    let generatedPairsList = [];
+      this.loadData();
+  }
 
-    pairListObjects.adjectives.forEach((adjective) => {
-      pairListObjects.cities.forEach((city) => generatedPairsList.push(adjective + " " + city))
-    });
+  loadData() {
+    const url = 'https://gp-js-test.herokuapp.com/api';
+    fetch(url)
+        .then((response) => {
+            return response.json()})
+        .then((json) => {
+            let generatedPairsList = [];
 
-    this.generatedListLength = generatedPairsList.length;
-    this.setState({
-      generatedList: generatedPairsList
-    });
+            json.adjectives.forEach((adjective) => {
+                json.cities.forEach((city) => generatedPairsList.push(adjective + " " + city))
+            });
+
+            this.generatedListLength = generatedPairsList.length;
+            this.setState({
+                generatedList: generatedPairsList
+            });
+        });
   }
 
   handleGenerateClick() {
@@ -67,8 +73,8 @@ class App extends Component {
   render() {
     const history = this.state.history;
     let generatedHistory = (history.length !== 0)
-                              ? history.join().replace(/,/g,'\n')
-                              : null;
+                           ? history.join().replace(/,/g,'\n')
+                           : null;
 
     return (
       <div className="App">
