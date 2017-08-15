@@ -8,7 +8,12 @@ import { generatePairs,
 import App from '../components/App';
 
 const mapStateToProps = (state) => {
-    return {state}
+    return {
+        pairs: state.renderApp.pairs,
+        history: state.renderApp.history,
+        textAreaHeight: state.renderApp.height,
+        canGenerate: state.renderApp.canGenerate
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
