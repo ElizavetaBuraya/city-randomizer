@@ -4,7 +4,8 @@ const initialState = {
   history: [],
   pairs: [],
   canGenerate: true,
-  height: 1
+  height: 1,
+  isFetching: false
 };
 
 export default function renderApp(state = initialState, action) {
