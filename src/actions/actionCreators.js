@@ -1,5 +1,24 @@
 import {actionTypes} from './actionTypes';
 
+export function fetchData() {
+    return (dispatch) => {
+        const url = 'https://gp-js-test.herokuapp.com/api';
+        dispatch(requestData());
+        fetch(url)
+            .then((response) => {
+                return response.json()})
+            .then((json) => {
+                let generatedPairsList = [];
+
+                json.adjectives.forEach((adjective) => {
+                    json.cities.forEach((city) => generatedPairsList.push(adjective + " " + city))
+                });
+
+                dispatch(generatePairs(generatedPairsList));
+            });
+    }
+}
+
 export function requestData() {
     return {
         type: actionTypes.REQUEST_DATA,
