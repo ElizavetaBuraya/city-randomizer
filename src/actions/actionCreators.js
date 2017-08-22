@@ -1,5 +1,12 @@
 import {actionTypes} from './actionTypes';
 
+export function requestData() {
+    return {
+        type: actionTypes.REQUEST_DATA,
+        isFetching: true
+    }
+}
+
 export function updateHistory(history){
     return {
         type: actionTypes.UPDATE_HISTORY,
