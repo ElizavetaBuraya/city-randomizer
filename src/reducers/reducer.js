@@ -15,7 +15,7 @@ export default function renderApp(state = initialState, action) {
         case actionTypes.UPDATE_HISTORY:
             return {...state, history: action.payload};
         case actionTypes.GENERATE_PAIRS:
-            return {...state, pairs: action.payload};
+            return {...state, pairs: action.payload, isFetching: false};
         case actionTypes.UPDATE_TEXT_AREA_HEIGHT:
             return {...state, height: action.payload};
         case actionTypes.TOGGLE_CAN_GENERATE:
