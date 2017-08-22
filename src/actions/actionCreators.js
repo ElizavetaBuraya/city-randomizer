@@ -17,6 +17,7 @@ export function updateHistory(history){
 export function generatePairs(pairs){
     return {
         type: actionTypes.GENERATE_PAIRS,
+        isFetching:false,
         payload: pairs
     };
 }
