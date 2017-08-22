@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Spinner from 'react-spinner-material';
 import '../styles/App.css';
 
 export default class App extends Component {
@@ -57,6 +58,7 @@ export default class App extends Component {
 
   render() {
     const history = this.props.history;
+    const isFetching = this.props.isFetching;
     const canGenerate = this.props.canGenerate;
     const textAreaHeight = this.props.textAreaHeight;
 
@@ -83,6 +85,15 @@ export default class App extends Component {
                     rows={textAreaHeight} /><br />
           <span>Generated {history.length} out of {this.generatedListLength}</span>
         </div>
+            {isFetching &&
+                <div className="App-content">
+                    <Spinner
+                        size={120}
+                        spinnerColor={"#333"}
+                        spinnerWidth={2}
+                        visible={true} />
+                </div>
+            }
       </div>
     );
   }
