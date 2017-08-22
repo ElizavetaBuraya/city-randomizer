@@ -26,6 +26,7 @@ export default class App extends Component {
 
     this.autoGrow();
 
+    if (generatedHistory.length === this.maxLength) {
       this.props.toggleGenerate(false);
     }
   }
