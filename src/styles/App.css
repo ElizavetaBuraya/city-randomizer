@@ -53,3 +53,7 @@ button {
 button[disabled] {
   cursor: default;
 }
+
+.spinner {
+  margin: 0 auto;
+}
