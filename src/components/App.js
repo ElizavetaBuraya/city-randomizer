@@ -10,24 +10,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-      this.loadData();
-  }
-
-  loadData() {
-    const url = 'https://gp-js-test.herokuapp.com/api';
-    fetch(url)
-        .then((response) => {
-            return response.json()})
-        .then((json) => {
-            let generatedPairsList = [];
-
-            json.adjectives.forEach((adjective) => {
-                json.cities.forEach((city) => generatedPairsList.push(adjective + " " + city))
-            });
-
-            this.generatedListLength = generatedPairsList.length;
-            this.props.generatePairsList(generatedPairsList);
-        });
+      this.props.fetchData();
   }
 
   handleGenerateClick() {
