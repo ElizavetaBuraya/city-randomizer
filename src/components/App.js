@@ -5,7 +5,7 @@ import '../styles/App.css';
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.generatedListLength = 0;
+    this.maxLength = 10;
     this.handleGenerateClick = this.handleGenerateClick.bind(this);
   }
 
@@ -45,7 +45,6 @@ export default class App extends Component {
 
     this.autoGrow();
 
-    if (generatedPairs.length === 0) {
       this.props.toggleGenerate(false);
     }
   }
