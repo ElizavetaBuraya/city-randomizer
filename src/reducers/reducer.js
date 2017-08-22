@@ -10,6 +10,8 @@ const initialState = {
 
 export default function renderApp(state = initialState, action) {
     switch(action.type){
+        case actionTypes.REQUEST_DATA:
+            return {...state, isFetching: true};
         case actionTypes.UPDATE_HISTORY:
             return {...state, history: action.payload};
         case actionTypes.GENERATE_PAIRS:
