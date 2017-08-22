@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { generatePairs,
+import { fetchData,
     updateHistory,
     updateTextAreaHeight,
     toggleCanGenerate } from '../actions/actionCreators';
@@ -9,6 +9,7 @@ import App from '../components/App';
 
 const mapStateToProps = (state) => {
     return {
+        isFetching: state.renderApp.isFetching,
         pairs: state.renderApp.pairs,
         history: state.renderApp.history,
         textAreaHeight: state.renderApp.height,
@@ -18,8 +19,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        generatePairsList:
-            bindActionCreators(generatePairs, dispatch),
+        fetchData:
+            bindActionCreators(fetchData, dispatch),
         renderHistory:
             bindActionCreators(updateHistory, dispatch),
         setTextAreaHeight:
