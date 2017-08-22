@@ -21,9 +21,7 @@ export default class App extends Component {
 
     this.textInput.value = randomPair;
     generatedHistory.push(randomPair);
-    generatedPairs.splice(randomPosition, 1);
 
-    this.props.generatePairsList(generatedPairs);
     this.props.renderHistory(generatedHistory);
 
     this.autoGrow();
